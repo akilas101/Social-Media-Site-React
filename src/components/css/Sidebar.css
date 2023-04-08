@@ -1,0 +1,9 @@
+.sidebar {
+  margin-top: 50px;
+  margin-left: 10px;
+  margin-right: 0px;
+  margin-bottom: 50px;
+  width:40%;
+  flex: 0.2;
+  /* background: rgb(61, 114, 145); */
+}

@@ -1,0 +1,16 @@
+/* #menu-item{
+    position:relative
+} */
+.prof-menu{
+    position:fixed;
+    margin-right: 250px;
+}
+MenuItem{
+    position:relative;
+}
+@media only screen and (max-width: 400px) {
+    
+}
+.pprops{
+    background-color:"rgb(21 215 215)";
+}

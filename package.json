@@ -1,28 +1,63 @@
 {
-  "name": "codespaces-react",
+  "name": "feleg-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^14.4.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "^5.0.1",
-    "web-vitals": "^3.1.0"
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.10.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.19",
+    "@headlessui/react": "^1.6.5",
+    "@heroicons/react": "^1.0.6",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.8.7",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "@thumbtack/thumbprint-react": "^14.12.1",
+    "antd": "^4.21.5",
+    "axios": "^0.27.2",
+    "bootstrap": "^4.5.3",
+    "cloudinary-react": "^1.8.1",
+    "daisyui": "^2.18.0",
+    "draft-js": "^0.11.7",
+    "js-cookie": "^2.2.1",
+    "material-ui": "^0.20.2",
+    "node-sass": "^4.14.1",
+    "pnp": "0.0.3",
+    "react": "^16.14.0",
+    "react-bootstrap": "^1.6.5",
+    "react-daisy": "^0.3.2",
+    "react-daisyui": "^2.0.5",
+    "react-dom": "^16.14.0",
+    "react-draft-wysiwyg": "^1.14.5",
+    "react-icons": "^4.4.0",
+    "react-loader-spinner": "^5.1.7-beta.1",
+    "react-redux": "^7.2.1",
+    "react-rounded-image": "^2.0.11",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "react-selectable-items": "^0.5.3",
+    "react-toastify": "^8.2.0",
+    "react-tooltip": "^4.2.10",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "tailwindcss": "^3.1.4"
   },
   "scripts": {
-    "start": "BROWSER=none WDS_SOCKET_PORT=0 react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:8000/",
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": "react-app"
   },
+  "homepage": "/",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -34,5 +69,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "@ant-design/icons": "^4.7.0"
+  },
+  "resolve.fallback": { "buffer": false }
 }

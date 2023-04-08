@@ -1,0 +1,485 @@
+
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {  update } from '../../actions/userActions'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencilAlt  } from '@fortawesome/free-solid-svg-icons'
+import EditEmailModal from '../modals/EditEmail'
+import EditDescriptionModal from '../modals/EditDescription'
+import EditPasswordModal from '../modals/EditPassword'
+import EditUsernameModal from '../modals/EditUsername'
+import ReactRoundedImage from "react-rounded-image";
+
+function EditProfile (props){
+    var pencil = <FontAwesomeIcon icon ={faPencilAlt}/>
+
+    const [editEmailOpen, setEditEmailOpen] = useState(false)
+    const [editPasswordOpen, setEditPasswordOpen] = useState(false)
+    const [editDescriptionOpen, setEditDescriptionOpen] = useState(false)
+    const [editUOpen, setEditUOpen] = useState(false)
+    const [textValue, setTextValue] = useState('')
+
+    const userLoggedin = useSelector(state=>state.userLoggedin)
+    const { userInfo1 } = userLoggedin
+    const userProfile = useSelector(state => state.userProfile)
+    const { Profile } = userProfile
+    
+    
+    const [image, setImage] = useState('')
+    const [imageRender, setImageRender] = useState('')
+    const [email, setEmail]= useState('')
+    const [password, setPassword]= useState('')
+    const [uname, setUname]= useState('')
+    
+    const fileSelectedHandeler =(e) =>{
+        setImageRender(URL.createObjectURL(e.target.files[0]))
+        setImage(e.target.files[0])
+    }
+
+       
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+       
+       
+        return ()=>{ console.log(Profile)}
+    })
+
+
+   
+    return<div className="edit-page-main"> 
+        <div className="edit-page">
+                <div className="edit-page-section">
+                <div className="edit-page-header">
+                    <h2 className="edit-page-title">EDIT DETAILS</h2>
+                </div>
+
+                <div className="edit-details-section">
+                <div>
+                
+                </div>
+                <div className="edit-content">
+                <h4>Username:</h4>
+                <p className="label-details-username">{Profile.username}</p>
+                <div className="edit-icon-username"
+                onClick={()=>{
+                    setEditUOpen(true)
+                    setTextValue(Profile.username)
+                }}>
+                {pencil}
+                </div>
+                <EditUsernameModal
+                open={editUOpen} 
+                onClose={()=> {setEditUOpen(false)
+                }} 
+                props={props}
+                textvalue={textValue}
+                />
+                </div>
+                
+                <div className="edit-content">
+                <h4>Email:</h4>
+                <p className="label-details">{Profile.email}</p>
+                <div className="edit-icon-email"
+                onClick={()=>{
+                    setEditEmailOpen(true)
+                    setTextValue(Profile.email)
+                    
+                }}>
+                {pencil}
+                </div>
+                <EditEmailModal 
+                open={editEmailOpen} 
+                onClose={()=> {setEditEmailOpen(false)
+                }} 
+                props={props}
+                textvalue={textValue}
+                />
+                </div>
+                
+                <div className="edit-content">
+                <h4>Change Password</h4>
+                <div className="edit-icon-password"
+                onClick={()=>{
+                    setEditPasswordOpen(true)
+                    setTextValue('')
+                }}>
+                {pencil}
+                </div>
+                <EditPasswordModal 
+                open={editPasswordOpen} 
+                onClose={()=> setEditPasswordOpen(false)} 
+                props={props}
+                textvalue={textValue}
+                />
+                </div>
+
+                <div className="edit-content">
+                <h4>Description:</h4>
+                <p className="description-details">
+                {Profile.description}
+                </p>
+                <div className="edit-icon-description"
+                onClick={()=>{
+                    setEditDescriptionOpen(true)
+                    setTextValue(Profile.description)
+                }}>
+                {pencil}
+                </div>
+                <EditDescriptionModal 
+                open={editDescriptionOpen} 
+                onClose={()=> setEditDescriptionOpen(false)} 
+                props={props}
+                textvalue={textValue}
+                />
+                </div>
+
+                
+                
+               </div>
+    </div>
+    </div>
+    </div>
+}
+
+export default EditProfile
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const HomeScreenAnswers = (props) => {
+    console.log(props)
+    var comment = <FontAwesomeIcon icon ={faComment}/>
+    var share = <FontAwesomeIcon icon ={faShare}/>
+    var trash = <FontAwesomeIcon icon ={faTrashAlt}/>
+    var editIcon = <FontAwesomeIcon icon={faTh}/>
+    var upvote = <FontAwesomeIcon icon={faCaretUp} size="2x" />
+    var down = <FontAwesomeIcon icon ={faCaretDown} size="2x"/>
+    
+    
+    const dispatch = useDispatch()
+    
+    
+    const [deleteOpen, setDeleteOpen] = useState(false)
+    const [deleteId, setDeleteId] = useState('')
+    const [answerId, setAnswerId] = useState('')
+    const [commentId, setCommentId]=useState('')
+    const [commentNumbers, setCommentNumbers]=useState('')
+    const [comments, setComments]=useState([])
+    const [loading_show_comment, setLoading]=useState(true)
+    const [date, setDate] = useState('')
+    const [likeCount, setLikeCount] = useState('')
+    const [likeAction, setLikeAction] = useState('')
+    const [dislikeAction, setDislikeAction] = useState('')
+
+
+
+
+
+    const userLoggedin = useSelector(state=>state.userLoggedin)
+    const p_d = useSelector(state=>state.userProfile)
+    //const comments_data = useSelector(state=>state.commentShow)
+    const comment_post=useSelector(state=>state.commentPost)
+    const comment_delete=useSelector(state=>state.commentDelete)
+    const question=useSelector(state=>state.selectedQuestion)
+    
+    const {posted_comment}=comment_post
+    //const {loading_show_comment, comments} = comments_data
+    const {message} = comment_delete
+    const {question_data} = question
+    
+    
+    
+    const {userInfo1} = userLoggedin
+    
+
+    
+    
+    
+  
+    
+    const showComment =async (answer_id)=>{
+      setCommentId(answer_id)
+      setDeleteId('')
+      setAnswerId('')
+      const url ="/api/comment/"+answer_id
+      const data = await axios.get(url)
+      setComments(data.data)
+      if(posted_comment || message)
+      setCommentNumbers(data.data.length)
+      setLoading(false)
+           
+    }
+    
+    const length =async ()=>{
+      
+      const url ="/api/comment/"+props.answer.id
+      axios.get(url)
+      .then((result)=>{
+        
+        setCommentNumbers(result.data.length)
+      })
+      .catch((err)=>{console.log(err)})
+           
+    }
+   const QuestionDispatch=(id)=>{
+     
+    dispatch(selectedQuestion(id))
+  }
+  const Profile = (id) =>{
+    
+    dispatch(profile(id))
+  }
+    useEffect(()=>{
+        if(posted_comment){
+          setLoading(true)
+          showComment(commentId)
+          
+        }
+        
+       
+      
+    },[comment_post])
+    
+  
+    useEffect(() => {
+      if(message){
+        setLoading(true)
+        showComment(commentId)
+        
+      }
+    }, [comment_delete])
+
+    useEffect(()=>{
+      
+      length()
+      if(props.condition){
+        Axios.get('/api/activity/date/'+props.answer.date).
+        then((date)=>{
+          setDate(date.data)
+          })
+        .catch((err)=>{console.log(err)})
+      }else{
+        setDate(props.answer.date)
+      }
+
+      Axios.get('/api/like/getLikes/'+props.answer.id)
+      .then((result)=>{
+        setLikeCount(result.data.likes.length)
+
+        result.data.likes.map((like)=>{
+          if (like.userId === props.answer.user_id) {
+            setLikeAction('liked')
+        }
+        })
+      })
+      .catch((err)=>{console.log(err)})
+
+      Axios.get('/api/like/getDislikes/'+props.answer.id)
+      .then((result)=>{
+
+        result.data.dislikes.map((dislike)=>{
+          if (dislike.userId === props.answer.user_id) {
+            setDislikeAction('disliked')
+        }
+        })
+      })
+      .catch((err)=>{console.log(err)})
+
+      
+    })
+    
+///////////////////
+<div className="flex-container">
+<div>
+<ReactRoundedImage
+image={props.answer.profilepic}
+imageWidth="45"
+imageHeight="45"
+roundedSize="0"
+/>
+</div>    
+<div className="user-details">
+    <div className="second-flex">
+    <Link to={"/profile/"+props.answer.user}
+    target="_blank"
+    //onClick={(e)=>{Profile(props.answer.user_id)}}
+    >
+    <p className="card-title"><strong>{
+      
+      props.answer.user
+    }</strong></p>
+    </Link>
+    <p className="white card-separator">.</p>
+    <p className="white">{date}</p>
+    </div>
+    <div className="details-description" style={{marginTop:"-15px"}}>
+    <p className="white">{props.answer.description}</p>
+    </div>
+</div>
+</div>
+<div style={{height:"30px"}}>
+{ (props.condition)&&
+<Link to ={'/'+props.answer.question_id} 
+target="_blank">
+  <h6 className="card-title"><strong>{props.answer.question}</strong></h6>
+</Link>
+}
+</div>   
+  <div className="answer">
+      <p>{props.answer.answer}</p>
+  </div>
+   
+  <div className="individual-answer-bottom">
+  
+      <div className="individual-answer-bottom-left">
+      <Like
+      likeAction={likeAction}
+      setLikeAction={setLikeAction}
+      likeCount={likeCount}
+      setLikeCount={setLikeCount}
+      dislikeAction={dislikeAction}
+      setDislikeAction={setDislikeAction}
+      id={props.answer.id}
+    />
+            
+          <div 
+          className="option-comment" 
+          data-tip data-for="commentTip"
+          onClick={(e)=>{
+            showComment(props.answer.id)
+            }}
+          >
+          {comment} 
+          <div style={{paddingLeft:"5px",marginTop:"-4px"}}>
+            {commentNumbers}
+          </div>
+          
+          </div>
+          
+          <ReactTooltip id="commentTip" place="top" effect="solid">
+              Comment
+          </ReactTooltip> 
+         
+         
+         </div>   
+
+      <div className="homescreen-answer-bottom-right">
+      {
+        (userInfo1 && userInfo1.id===props.answer.user_id)?
+        <div className="question-edit">
+        <div data-tip data-for="editTip" className="share" 
+        onClick={()=>{
+         setAnswerId(props.answer.id)
+         setCommentId('')
+         setDeleteId('')
+         dispatch(profile_details())
+         }}>
+           {editIcon}
+        </div>
+        
+        <ReactTooltip id="editTip" place="top" effect="solid">
+           Edit Answer
+        </ReactTooltip>   
+       </div>
+   
+        :
+         <div></div>
+      }
+         
+      {
+        (userInfo1 && userInfo1.id===props.answer.user_id)?
+        <div className="question-delete">
+      <div data-tip data-for="deleteTip" 
+      onClick={()=>{
+        setDeleteOpen(true)
+        setCommentId('')
+        setAnswerId('')
+        setDeleteId(props.answer.id)
+        
+      }}>
+              {trash} 
+          </div>
+          
+          <ReactTooltip id="deleteTip" place="top" effect="solid">
+              Delete
+          </ReactTooltip>
+      </div>:
+      <div></div>
+      }  
+      <Dislike
+            dislikeAction={dislikeAction}
+            setDislikeAction={setDislikeAction}
+            likeAction={likeAction}
+            setLikeAction={setLikeAction}
+            likeCount={likeCount}
+            setLikeCount={setLikeCount}
+            id={props.answer.id}
+      />
+      <div className="question-share">
+          <div data-tip data-for="shareTip" className="share">
+              {share}
+          </div>
+          <ReactTooltip id="shareTip" place="top" effect="solid">
+              Share
+          </ReactTooltip>
+        </div>
+      </div>
+     
+  </div>
+  {
+    (props.answer.id===answerId)?              
+    <div>
+    <TextEditor 
+    id={answerId}
+    props={props}
+    type="editing"
+    text={props.answer.answer}
+    onClose={()=>{
+      setAnswerId("")
+    }}
+    />
+    </div>:<div></div>
+  }
+  
+  { 
+    (commentId===props.answer.id) ?
+    
+    loading_show_comment?<div className="loaders-comment"><LoaderDots size="small"/></div>:
+    
+    <Comment
+    props={props}
+    comments={comments}
+    answer_id={props.answer.id}
+    />
+    :<div></div>
+  }
+  {
+    (deleteId===props.answer.id)
+  
+    ?
+    <DeleteAnswer 
+    open={deleteOpen} 
+    onClose={()=> setDeleteOpen(false)} 
+    props={props}
+    id={deleteId}
+    />
+    
+    :<div></div>
+  }

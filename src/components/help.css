@@ -1,0 +1,61 @@
+.homepae{
+    box-shadow: 10px 13px 16px rgba(252, 252, 252, 0.85);
+    margin-top: 30px;
+}
+.help-title{
+    margin-left: 40%;
+    font-size:larger;
+
+    margin-top:2%}
+.help-description{
+width:100%;
+margin-top:1% ;
+padding-left:15%;
+padding-right:15%;
+font-size: medium;
+/* margin-left: 10%; */
+}
+.hoe{
+    width:100%;
+}
+.hoepae{
+    width:100%;
+   
+}
+.homepae{
+    width:100%;
+}
+.help-options{
+    margin-left: 40%;
+    font-size: large;
+
+    margin-top:2%
+}
+.profile-navbar-help{
+    height: 40px;
+    margin-top: 1%;
+margin-left: 15%;
+width: fit-content;
+border-top: solid 2px #e3e8e5;
+border-bottom: solid 2px #e3e8e5;
+font-size: 14px;
+/* margin-top: -14px; */
+display: flex;}
+/* .profile-navlinks navlinks-color{ */
+    
+.profile-navlinks{
+    height:38px;
+    padding: 0 25px 0 25px;
+    width: fit-content;
+    padding-top: 7px;
+    text-align: center;
+  }
+  .navlinks-color{
+    color: #3c3b3b;
+    height: 100%;
+  }
+  .profile-navlinks:hover{
+    background-color: #86f1de;
+    color: #363636;
+    cursor: pointer;
+  }

@@ -1,0 +1,35 @@
+.widget {
+  flex: 0.2;
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  height: fit-content;
+  background-color: rgba(237, 242, 239, 0.268);
+  margin-left: 20px;
+  width: 300px;
+}
+@media only screen and (max-width: 700px) {
+  .widget {display: none;
+
+}}
+.widget__header {
+  border-bottom: 1px solid lightgray;
+  font-family: Helvetica;
+}
+
+.widget__header > h5 {
+  padding: 10px;
+  color: rgb(80, 80, 80);
+  font-size: 15px;
+  letter-spacing: 1.1px;
+
+}
+
+.widget__contents {
+
+  display: flex;
+  flex-direction: column;
+}
